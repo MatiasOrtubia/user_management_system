@@ -34,7 +34,14 @@ def index():  # ese 'index' puede tener otro nombre que yo quiera.
 def destroy(id):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM empleados WHERE ID=%s", id)
+
+    cursor.execute("SELECT foto FROM empleados WHERE id=%s", id) # Se selecciona el empleado
+    #fila = cursor.fetchall() # Se obtienen los datos
+    #os.remove(os.path.join(app.config['CARPETA'], fila[0][0])) # Se elimina la imagen guardada en la carpeta uploads
+    fila = cursor.fetchone() # Se obtienen los datos. fetchone obtiene un solo dato, por lo que es bueno usarlo cuando el id es unico. Ver que en otra uso fetchall, eso trae mas datos y hay que poner fila[0][0]
+    os.remove(os.path.join(app.config['CARPETA'], fila[0]))
+
+    cursor.execute("DELETE FROM empleados WHERE id=%s", id)
     conn.commit()
     return redirect('/')
 
