@@ -8,6 +8,8 @@
 </head>
 <body> -->
 {% include 'header.html' %}
+    <a class="btn btn-dark" href="{{url_for('create')}}">Nuevo registro</a>
+    <br>
     <table class="table table-light">
         <thead class="thead-light">
             <tr>
@@ -22,19 +24,17 @@
             {% for empleado in empleados %}
             <tr>
                 <td>{{empleado[0]}}</td>
-                <td>{{empleado[3]}}</td>
+                <td>
+                    <img class="img-thumbnail" width="100px" src="uploads/{{empleado[3]}}" alt="Foto de {{empleado[1]}}">
+                </td>
                 <td>{{empleado[1]}}</td>
                 <td>{{empleado[2]}}</td>
-                <td>
-                    <a href="/edit/{{empleado[0]}}">Editar</a>
-                      |  
-                    <a href="/destroy/{{empleado[0]}}">Eliminar</a>
+                <td> 
+                    <a class="btn btn-warning" href="/edit/{{empleado[0]}}">Editar</a>
+                    <a onclick="return confirm('Seguro queres eliminarlo?')" class="btn btn-danger" href="/destroy/{{empleado[0]}}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 {% include 'footer.html' %}
-<!--     
-</body>
-</html> -->

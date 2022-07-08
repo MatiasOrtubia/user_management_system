@@ -1,26 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Create</title>
-</head>
-<body>
-    
+{% include 'header.html' %}
     <form method="POST" action="/store" enctype="multipart/form-data">
-        Nombre:
-        <input type="text" name="txtNombre" id="txtNombre">
-        <hr>
-    
-        Correo:
-        <input type="text" name="txtCorreo" id="txtCorreo">
-    
-        Foto:
-        <input type="file" name="txtFoto" id="txtFoto">
-    
-        <input type="submit" value="Agregar">
+        <div class="card">
+            <div class="card-header">
+                Nuevo registro
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Datos</h5>
+                <p class="card-text">
+
+                    <div class="form-group">
+                        <label for="txtNombre">Nombre:</label>
+                        <input id="txtNombre" class="form-control" type="text" name="txtNombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtCorreo">Correo:</label>
+                        <input id="txtCorreo" class="form-control" type="text" name="txtCorreo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtFoto">Foto:</label>
+                        <input id="txtFoto" class="form-control" type="file" name="txtFoto">
+                    </div>
+                
+                    <input class="btn btn-success" type="submit" value="Agregar">
+                    <a class="btn btn-primary" onclick="return confirm('Atención!\nLos datos del formulario no se guardan.')" href="{{url_for('index')}}">Regresar</a>
+                </p>
+            </div>
+        </div>
+        
+        
+        
+        
     </form>
-    
-</body>
-</html>
+{% include 'footer.html' %}

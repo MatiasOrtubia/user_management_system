@@ -1,22 +1,46 @@
-{% for empleado in empleados %}
-<form method="post" action="/update" enctype="multipart/form-data">
+{% include 'header.html' %}
+    {% for empleado in empleados %}
+    <form method="post" action="/update" enctype="multipart/form-data">
 
-    <input type="text" value="{{empleado[0]}}" name="txtId" id="txtId">
-    <br>
+        <div class="card">
+            <div class="card-header">
+                Editar datos
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Datos</h5>
+                <p class="card-text">
+                    
+                    <div class="form-group">
+                        <input id="txtId" value="{{empleado[0]}}" class="form-control" type="hidden" name="txtId">
+                    </div>
 
-    Nombre:
-    <input type="text" value="{{empleado[1]}}" name="txtNombre" id="txtNombre">
-    <br>
+                    <div class="form-group">
+                        <label for="txtNombre">Nombre:</label>
+                        <input id="txtNombre" value="{{empleado[1]}}" class="form-control" type="text" name="txtNombre">
+                    </div>
 
-    Correo:
-    <input type="text" value="{{empleado[2]}}" name="txtCorreo" id="txtCorreo">
-    <br>
+                    <div class="form-group">
+                        <label for="txtCorreo">Correo:</label>
+                        <input id="txtCorreo" value="{{empleado[2]}}" class="form-control" type="text" name="txtCorreo">
+                    </div>
 
-    Foto: {{empleado[3]}}
-    <input type="file" name="txtFoto" id="txtFoto">
-    <br>
+                    <div class="form-group">
+                        <label for="txtFoto">
+                            Foto:
+                            <br>
+                            <img class="img-thumbnail" width="100px" src="{{url_for('uploads', nombreFoto=empleado[3])}}" alt="Foto de {{empleado[1]}}">
+                        </label>
+                        <input id="txtFoto" class="form-control" type="file" name="txtFoto">
+                    </div>
+                    <input class="btn btn-success" onclick="return confirm('¿Guardar cambios?')" type="submit" value="Guardar cambios">
+                    <a class="btn btn-primary" onclick="return confirm('Atención!\nLos datos del formulario no se guardan.')" href="{{url_for('index')}}">Regresar</a>
+                </p>
+            </div>
+        </div>
 
-    <input type="submit" value="Editar">
 
-</form>
-{% endfor %}
+        
+
+    </form>
+    {% endfor %}
+{% include 'footer.html' %}
